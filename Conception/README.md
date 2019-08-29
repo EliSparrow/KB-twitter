@@ -5,16 +5,16 @@
 #### Todo :
 
 - Back-end :
-    - User MODEL: username(R) | email(R) | password(R) | avatar | admin | birthdate(R) (age > 13) | description | ville | webSite | language | Ban (until date) | Suspended (boolean) | createdAt | updatedAt
+    - User MODEL: username(R) | email(R) | password(R) | avatar | admin(default:false) | birthdate(R) (age > 13) | description | ville | webSite | language | Ban(default:0)(until date) | Suspended(default:false)(boolean) | followId(a la création) | createdAt | updatedAt
         1. Register
         2. Login
         3. User CRU(D) + suspend account(BONUS), only admin can delete account
 
     - Post MODEL: content | userId | createdAt | updatedAt
-        1. Post CRUD (user online) -> U&D only for owner and admin
+        1. Post CR(UD) (user online) -> U&D only for owner and admin
         2. All Posts page ('/explore')
 
-    - Follow MODEL: followedUserId | followingUserId | seePost(boolean)
+    - Follow MODEL: followedUsersId | followingUsersId | seePost(boolean)
         1. Follow C~~R~~UD (user online, impossible to follow himself)
 
     - (BONUS) Comment MODEL: content | postId | userId | createdAt | updatedAt
