@@ -25,7 +25,7 @@ let UserSchema = new Schema({
     },
 
     birthdate: {
-        type: Number,
+        type: Date,
         required: true,
     },
 
