@@ -67,7 +67,7 @@ router.post('/', [auth, [
                 return res.json(profile);
             }
 
-            profile = new Profile(profileFileds)
+            profile = new Profile(profil eFileds)
 
             await Profile.save();
             res.json(profile);
