@@ -13,12 +13,12 @@ router.post('/', [
         .isEmpty(),
     check('email', 'Email not valid').isEmail(),
     check('password', 'Password must be 5 or more characters').isLength({ min: 5 }),
-    check('birthdate', 'Enter date in format only').isISO8601()
+    //check('birthdate', 'Enter date in format only').isISO8601()
 ],
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ erros: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
         const { username, email, password } = req.body;
 
@@ -26,7 +26,9 @@ router.post('/', [
             let user = await User.findOne({ email });
 
             if (user) {
-                return res.status(400).json({ errors: [{ message: 'Email already exist' }] });
+                return res
+                .status(400)
+                .json({ errors: [{ message: 'Email already exist' }] });
             }
 
             const avatar = gravatar.url(email, {

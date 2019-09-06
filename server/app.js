@@ -6,7 +6,9 @@ const app = express();
 
 connectDB();
 
-app.get('/', (req, res) => res.send('API Runnig'));
+app.use(express.json({extended: false}));
+
+app.get('/', (req, res) => res.send('API Running'));
 
 app.use('/user', require('./routes/user'));
 app.use('/login', require('./routes/login'));
