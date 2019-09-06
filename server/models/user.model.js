@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-let UserSchema = new Schema({
+let UserSchema = new mongoose.Schema({
     username: {
         type: String,
         min: 3,
@@ -13,10 +13,7 @@ let UserSchema = new Schema({
     email: {
         type: String,
         required: true,
-        validate: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
-        unique: true,
-        lowercase: true,
-        trim: true
+        unique: true
     },
 
     password: {
@@ -26,7 +23,7 @@ let UserSchema = new Schema({
 
     birthdate: {
         type: Number,
-        required: true,
+        // required: true,
     },
 
     admin: {
@@ -78,5 +75,4 @@ let UserSchema = new Schema({
     },
 });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+module.exports = User = mongoose.model('user', UserSchema);
