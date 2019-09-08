@@ -13,7 +13,7 @@ router.get('/me', auth, async (req, res) => {
             .populate('user', ['username', 'avatar']);
 
         if (!profile) {
-            return res.status(400).json({ message: 'Thereis no profil' });
+            return res.status(400).json({ message: 'There is no profil' });
         }
 
         res.json(profile);

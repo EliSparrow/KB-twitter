@@ -47,9 +47,9 @@ app.use(express.json({extended: false}));
 
 app.get('/', (req, res) => res.send('API Running'));
 
-app.use('/user', users);
-app.use('/user/login', login);
+app.use('/users', users);
+app.use('/users/login', login);
 app.use('/profile', profile);
-app.use('/post', posts);
+app.use('/posts', posts);
 
 app.listen(port, () => console.log(`Server strated on port ${port}`));

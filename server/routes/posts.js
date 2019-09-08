@@ -6,7 +6,7 @@ const auth = require('../middleware/login');
 const Post = require('../models/post.model')
 const User = require('../models/user.model')
 
-// @route   POST api/posts
+// @route   POST posts
 // @desc    Create a post
 // @access  Private
 
@@ -41,7 +41,7 @@ router.post('/', [auth, [
   }
 );
 
-// @route   GET api/posts
+// @route   GET posts
 // @desc    GET all posts
 // @access  Private
 router.get('/', auth, async (req, res) => {
@@ -54,7 +54,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-// @route   GET api/posts/:id
+// @route   GET posts/:id
 // @desc    GET post by id
 // @access  Private
 router.get('/:id', auth, async (req, res) => {
@@ -75,7 +75,7 @@ router.get('/:id', auth, async (req, res) => {
   }
 });
 
-// @route   DELETE api/posts/:id
+// @route   DELETE posts/:id
 // @desc    delete post by id
 // @access  Private
 router.get('/:id', auth, async (req, res) => {
@@ -103,6 +103,29 @@ router.get('/:id', auth, async (req, res) => {
     res.status(500).send('Server Error')
   }
 });
+
+// @route   PUT posts/:id/like
+// @desc    Like post by id
+// @access  Private
+router.put('/:id/like', auth, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+
+    if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
+      return res.json(400).json({ msg: 'Post already liked'})
+    }
+
+    post.likes.unshift({ userId: req.user.id });
+
+    await post.save();
+
+    res.json(post.likes);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+    
+  }
+})
 
 
 module.exports = router;

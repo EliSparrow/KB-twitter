@@ -32,6 +32,14 @@ let CommentSchema = new Schema ({
         type: Date,
         default: Date.now
     },
+    likes: [
+        {
+            userId: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            }
+        }
+    ]
 });
 
 

@@ -25,6 +25,35 @@ let PostSchema = new Schema ({
         type: Date,
         default: Date.now
     },
+    likes: [
+        {
+            userId: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            }
+        }
+    ],
+    comments: [
+        {
+            userId: {
+                type: Schema.Types.ObjectId,
+                ref: 'users'
+            },
+            content: {
+                type: String,
+                required: true
+            },
+            createAt: {
+                type: Date,
+                default: Date.now
+            },
+        
+            updateAt: {
+                type: Date,
+                default: Date.now
+            },
+        }
+    ]
 });
 
 
