@@ -235,19 +235,19 @@ router.delete('/:id/unfollow', auth, async (req, res) => {
   }
 });
 
-// @route   GET users/:id/followers
-// @desc    GET user's followers
+// @route   GET users/:id/following
+// @desc    GET following users
 // @access  Public
 router.get('/:id/followers', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password')
-    const followers = await Follow.find({ userId: user.id}).populate('followedId', ['username', 'avatar', '_id'], User)
+    const followings = await Follow.find({ userId: user.id}).populate('followedId', ['username', 'avatar', '_id'], User)
 
     if(!user){
       return res.status(404).json({ msg: 'User not found'})
     }
 
-    res.json(followers);
+    res.json(followings);
   } catch (err) {
     console.error(err.message);
     if(err.kind === 'ObjectId') {
@@ -257,19 +257,20 @@ router.get('/:id/followers', async (req, res) => {
   }
 });
 
-// @route   GET users/:id/following
-// @desc    GET following users
+
+// @route   GET users/:id/followers
+// @desc    GET user's followers
 // @access  Public
 router.get('/:id/following', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password')
-    const followings = await Follow.find({ followedId: user.id}).populate('userId', ['username', 'avatar', '_id'], User)
+    const followers = await Follow.find({ followedId: user.id}).populate('userId', ['username', 'avatar', '_id'], User)
 
     if(!user){
       return res.status(404).json({ msg: 'User not found'})
     }
 
-    res.json(followings);
+    res.json(followers);
   } catch (err) {
     console.error(err.message);
     if(err.kind === 'ObjectId') {
