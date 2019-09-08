@@ -5,17 +5,17 @@ let LikeSchema = new Schema ({
 
     postId: {
         type: Schema.Types.ObjectId,
-        ref: 'Post'
+        ref: 'posts'
     },
 
     commentId: {
         type: Schema.Types.ObjectId,
-        ref: 'Comment'
+        ref: 'comments'
     },
 
     userId: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
 

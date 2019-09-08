@@ -11,14 +11,14 @@ let CommentSchema = new Schema ({
 
     postId: {
         type: Schema.Types.ObjectId,
-        ref: 'Post',
+        ref: 'posts',
         required: true
 
     },
 
     userId: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
 
     },
