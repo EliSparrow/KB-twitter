@@ -59,7 +59,7 @@ router.get('/', auth, async (req, res) => {
 // @route   GET posts/:id
 // @desc    GET post by id
 // @access  Private
-router.get('/:id', auth, async (req, res) => {
+router.get('/post/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
     const comments = await Comment.find({ postId: post.id})
@@ -72,7 +72,7 @@ router.get('/:id', auth, async (req, res) => {
   } catch (err) {
     console.error(err.message);
     if(err.kind === 'ObjectId') {
-      return res.status(404).json({ msg: 'Post not found' })
+      return res.status(404).json({ msg: 'Post not found coucou' })
     }
     res.status(500).send('Server Error')
   }
@@ -102,24 +102,26 @@ router.get('/user_posts/:id', auth, async (req, res) => {
 // @route   GET posts/follow
 // @desc    GET user's post
 // @access  Private
-// router.get('/follow', auth, async (req, res) => {
-//   try {
-//     const follows = await Follow.find({ userId: req.user.id })
-//     const posts 
+router.get('/follow', auth, async (req, res) => {
+  try {
+    const follows = await Follow.find({ userId: req.user.id }).select('followedId')
+    var followsId = [];
+    follows.forEach(element => {
+      followsId.push(element.followedId)
+    });
+    const posts = await Post.find({ userId: { $in: followsId} })
+    .populate('userId', ['username', 'avatar', '_id'], User)
 
-//     if(!posts) {
-//       return res.status(404).json({ msg: 'Posts not found' })
-//     }
+    if(!posts) {
+      return res.status(404).json({ msg: 'Posts not found' })
+    }
 
-//     res.json(posts);
-//   } catch (err) {
-//     console.error(err.message);
-//     if(err.kind === 'ObjectId') {
-//       return res.status(404).json({ msg: 'User not found' })
-//     }
-//     res.status(500).send('Server Error')
-//   }
-// });
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error')
+  }
+});
 
 // @route   PUT posts/:id
 // @desc    update post by id
