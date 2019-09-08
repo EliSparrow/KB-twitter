@@ -104,8 +104,8 @@ router.get('/user_posts/:id', auth, async (req, res) => {
 // @access  Private
 // router.get('/follow', auth, async (req, res) => {
 //   try {
-//     const posts = await Follow.find({ userId: req.user.id })
-//       .populate('post')
+//     const follows = await Follow.find({ userId: req.user.id })
+//     const posts 
 
 //     if(!posts) {
 //       return res.status(404).json({ msg: 'Posts not found' })
