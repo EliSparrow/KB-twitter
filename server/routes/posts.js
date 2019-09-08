@@ -179,6 +179,9 @@ router.delete('/:id', auth, async (req, res) => {
   }
 });
 
+
+// LIKE SECTION
+
 // @route   PUT posts/:id/like
 // @desc    Like post by id
 // @access  Private
@@ -186,8 +189,8 @@ router.put('/:id/like', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if(post.likes.filter(like => like.user.toString() === req.user.id).length > 0) {
-      return res.json(400).json({ msg: 'Post already liked'})
+    if(post.likes.filter(like => like.userId.toString() === req.user.id).length > 0) {
+      return res.status(400).json({ msg: 'Post already liked'})
     }
 
     post.likes.unshift({ userId: req.user.id });
