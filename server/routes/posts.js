@@ -78,7 +78,7 @@ router.get('/:id', auth, async (req, res) => {
 // @route   DELETE posts/:id
 // @desc    delete post by id
 // @access  Private
-router.get('/:id', auth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
