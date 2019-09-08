@@ -23,7 +23,7 @@ let LikeSchema = new Schema ({
         type: Date,
         default: Date.now
     },
-}),
+});
 
 
 const Like = mongoose.model("Like", LikeSchema);
