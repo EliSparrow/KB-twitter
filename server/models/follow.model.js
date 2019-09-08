@@ -22,7 +22,7 @@ let FollowSchema = new Schema({
         default: Date.now
     },
 
-}),
+})
 
 
 const Follow = mongoose.model("Follow", FollowSchema);
