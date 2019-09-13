@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
 const gravatar = require('gravatar');
-const User = require('../models/user.model');
+const User = require('../../models/user.model');
 
 router.post('/', [
     check('username', 'Username is required')
