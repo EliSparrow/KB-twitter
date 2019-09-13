@@ -38,10 +38,9 @@ app.use(cors({
   }
 }));
 
-const users = require('./routes/users');
-const profile = require('./routes/profile');
-const posts = require('./routes/posts');
-const login = require('./routes/login');
+const users = require('./routes/api/users');
+const posts = require('./routes/api/posts');
+const login = require('./routes/api/login');
 
 app.use(express.json({extended: false}));
 
@@ -49,7 +48,6 @@ app.get('/', (req, res) => res.send('API Running'));
 
 app.use('/users', users);
 app.use('/users/login', login);
-app.use('/profile', profile);
 app.use('/posts', posts);
 
 app.listen(port, () => console.log(`Server strated on port ${port}`));

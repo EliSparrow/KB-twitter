@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://admin:admin@rush-mern-2gkgv.gcp.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecretpassword1"
+}

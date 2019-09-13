@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/login');
-const Profile = require('../models/user.model');
-const User = require('../models/user.model');
+const auth = require('../../middleware/login');
+const Profile = require('../../models/user.model');
+const User = require('../../models/user.model');
 const { check, validationResult } = require('express-validator');
 
 
 
 router.get('/me', auth, async (req, res) => {
     try {
-        const profile = await Profile.findOne({ user: req.user.id })
+        const profile = await Profile.findOne({ _id: req.user.id })
             .populate('user', ['username', 'avatar']);
 
         if (!profile) {
@@ -25,12 +25,10 @@ router.get('/me', auth, async (req, res) => {
 
 
 router.post('/', [auth, [
-    check('status', 'Status is required')
+    check('admin', 'Status is required')
         .not()
         .isEmpty(),
-    check('skills', 'Skills i required')
-        .not()
-        .isEmpty(),
+    
 ]],
 
     async (req, res) => {
@@ -50,11 +48,8 @@ router.post('/', [auth, [
         if (description) profileFields.description = description;
         if (website) profileFields.website = website;
         if (language) profileFields.language = language;
-        if (status) profileFields.status = status;
-        if (skills) {
-            profileFields.skills = skills.split('/').map(skill => skill.trim());
-        }
-
+        if (admin) profileFields.status = admin;
+        
         try {
             let profile = await Profile.findOne({ user: req.user.id });
 

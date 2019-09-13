@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/login');
+const auth = require('../../middleware/login');
 
-const Post = require('../models/post.model')
-const User = require('../models/user.model')
-const Comment = require('../models/comment.model')
-const Follow = require('../models/follow.model')
+const Post = require('../../models/post.model')
+const User = require('../../models/user.model')
+const Comment = require('../../models/comment.model')
+const Follow = require('../../models/follow.model')
 
 // @route   POST posts
 // @desc    Create a post
